@@ -3,19 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Katroz | Объекты</title>
-    <!-- Подключаем красивые шрифты от Google -->
+    <title>Katroz | Objects</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
     
     <style>
-        /* ЦВЕТОВАЯ ПАЛИТРА */
         :root {
-            --bg-color: #f7f5f0; /* Теплый кремовый фон */
-            --text-main: #2b2b2b; /* Графитовый текст */
-            --text-muted: #7a7a7a; /* Приглушенный песочный/серый */
-            --accent-line: #d6cec1; /* Песочная линия */
+            --bg-color: #f7f5f0; /* Теплый кремовый */
+            --text-main: #2b2b2b; /* Графит */
+            --text-muted: #7a7a7a;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -24,130 +22,94 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             font-family: 'Montserrat', sans-serif;
-            line-height: 1.6;
             font-weight: 300;
             -webkit-font-smoothing: antialiased;
         }
 
-        h1, h2, h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 400;
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 60px 24px; }
 
-        .container { max-width: 1100px; margin: 0 auto; padding: 60px 24px; }
-
-        /* ШАПКА (Загадочная) */
+        /* ШАПКА */
         header { 
             text-align: center; 
-            margin-bottom: 100px; 
+            margin-bottom: 80px; 
             padding-top: 40px;
         }
         header h1 { 
-            font-size: 2.5rem; 
-            letter-spacing: 0.2em; 
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem; /* Крупный заголовок */
+            font-weight: 400;
+            letter-spacing: 0.15em; 
             text-transform: uppercase;
-            margin-bottom: 16px;
-        }
-        header p { 
-            font-size: 0.85rem; 
-            letter-spacing: 0.1em; 
-            text-transform: uppercase;
-            color: var(--text-muted);
+            color: var(--text-main);
         }
 
-        /* ГАЛЕРЕЯ (Акцент на изделия) */
+        /* СЕТКА ГАЛЕРЕИ */
         .gallery {
-            display: flex;
-            flex-direction: column;
-            gap: 100px; /* Много пространства между работами */
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Автоматическая сетка */
+            gap: 20px; /* Отступы между фото */
         }
 
-        .item {
-            display: flex;
-            flex-direction: column;
-            gap: 32px;
-            align-items: center;
+        /* БЛОК ФОТО */
+        .photo-wrapper {
+            position: relative;
+            overflow: hidden; /* Чтобы увеличенное фото не вылезало за края */
+            background-color: #e8e4dd;
+            aspect-ratio: 4 / 5; /* Пропорции фото (вертикальные) */
+            cursor: pointer;
+            display: block;
         }
 
-        /* Блок для фото */
-        .item-img {
+        /* Сама картинка (заглушка) */
+        .photo-img {
             width: 100%;
-            max-width: 700px;
-            height: 500px;
-            background-color: #e8e4dd; /* Заглушка цвета камня */
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease; /* Плавное увеличение */
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             letter-spacing: 0.1em;
             text-transform: uppercase;
-            /* Сюда потом вставим реальные фото */
         }
 
-        .item-text {
-            text-align: center;
-            max-width: 500px;
+        /* ЭФФЕКТ ПРИ НАВЕДЕНИИ */
+        .photo-wrapper:hover .photo-img {
+            transform: scale(1.08); /* Увеличение на 8% */
         }
 
-        .item-text h2 { 
-            font-size: 1.8rem; 
-            margin-bottom: 12px; 
-        }
-        
-        .item-text p { 
-            color: var(--text-muted); 
-            font-size: 0.95rem;
-            margin-bottom: 24px;
-        }
-
-        .item-btn {
-            display: inline-block;
-            text-decoration: none;
-            color: var(--text-main);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            border-bottom: 1px solid var(--text-main);
-            padding-bottom: 4px;
-            transition: opacity 0.3s;
-        }
-        .item-btn:hover { opacity: 0.5; }
-
-        /* ПОДВАЛ (Без контактов) */
+        /* ПОДВАЛ */
         footer {
-            margin-top: 120px;
+            margin-top: 100px;
             padding-top: 40px;
-            border-top: 1px solid var(--accent-line);
             text-align: center;
         }
 
-        .secret-text {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            letter-spacing: 0.05em;
-            margin-bottom: 24px;
-        }
-
-        /* Кнопка "Связаться" */
         .contact-btn {
             display: inline-block;
+            background-color: transparent;
+            color: var(--text-main);
+            text-decoration: none;
+            padding: 12px 30px;
+            border: 1px solid var(--text-main);
+            border-radius: 2px;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+        
+        .contact-btn:hover { 
             background-color: var(--text-main);
             color: var(--bg-color);
-            text-decoration: none;
-            padding: 16px 40px;
-            border-radius: 2px;
-            font-size: 0.85rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            transition: background 0.3s;
         }
-        .contact-btn:hover { background-color: #000; }
 
         @media (max-width: 768px) {
-            header h1 { font-size: 2rem; }
-            .item-img { height: 350px; }
-            .gallery { gap: 60px; }
+            header h1 { font-size: 3rem; }
+            .gallery { grid-template-columns: 1fr; } /* На телефоне в одну колонку */
+            .container { padding: 30px 16px; }
         }
     </style>
 </head>
@@ -157,52 +119,42 @@
         <!-- ШАПКА -->
         <header>
             <h1>Katroz</h1>
-            <p>Форма и Материя</p>
         </header>
 
-        <!-- ГАЛЕРЕЯ РАБОТ -->
+        <!-- СЕТКА С ФОТО -->
+        <!-- Сейчас там стоят заглушки, скоро мы их заменим на твои фото -->
         <section class="gallery">
             
-            <!-- Изделие 1 -->
-            <div class="item">
-                <!-- Сюда вставим фото позже -->
-                <div class="item-img">Фотография сумки</div>
-                <div class="item-text">
-                    <h2>Объект I</h2>
-                    <p>Натуральная кожа. Теплый песочный оттенок. Создана для ежедневного ритуала.</p>
-                    <a href="https://t.me/ВАШ_НИК" class="item-btn" target="_blank">Запросить детали</a>
-                </div>
-            </div>
+            <a href="https://t.me/ВАШ_НИК" target="_blank" class="photo-wrapper">
+                <div class="photo-img">Фото 1</div>
+            </a>
 
-            <!-- Изделие 2 -->
-            <div class="item">
-                <!-- Сюда вставим фото позже -->
-                <div class="item-img">Фотография украшения</div>
-                <div class="item-text">
-                    <h2>Объект II</h2>
-                    <p>Гладкий камень, ручная сборка. Мягкий блеск, который не кричит о себе.</p>
-                    <a href="https://t.me/ВАШ_НИК" class="item-btn" target="_blank">Запросить детали</a>
-                </div>
-            </div>
+            <a href="https://t.me/ВАШ_НИК" target="_blank" class="photo-wrapper">
+                <div class="photo-img">Фото 2</div>
+            </a>
 
-            <!-- Изделие 3 -->
-            <div class="item">
-                <!-- Сюда вставим фото позже -->
-                <div class="item-img">Фотография сумки</div>
-                <div class="item-text">
-                    <h2>Объект III</h2>
-                    <p>Сдержанная форма, внимание к швам. Вещь, которая остается с тобой надолго.</p>
-                    <a href="https://t.me/ВАШ_НИК" class="item-btn" target="_blank">Запросить детали</a>
-                </div>
-            </div>
+            <a href="https://t.me/ВАШ_НИК" target="_blank" class="photo-wrapper">
+                <div class="photo-img">Фото 3</div>
+            </a>
+
+            <a href="https://t.me/ВАШ_НИК" target="_blank" class="photo-wrapper">
+                <div class="photo-img">Фото 4</div>
+            </a>
+
+            <a href="https://t.me/ВАШ_НИК" target="_blank" class="photo-wrapper">
+                <div class="photo-img">Фото 5</div>
+            </a>
+
+            <a href="https://t.me/ВАШ_НИК" target="_blank" class="photo-wrapper">
+                <div class="photo-img">Фото 6</div>
+            </a>
 
         </section>
 
         <!-- ПОДВАЛ -->
         <footer>
-            <p class="secret-text">Создано в тени. Для тех, кто ценит форму.</p>
-            <!-- ЗАМЕНИ ССЫЛКУ НА СВОЙ ТЕЛЕГРАМ ИЛИ ВАТСАП -->
-            <a href="https://t.me/ВАШ_НИК" class="contact-btn" target="_blank">Отправить запрос</a>
+            <!-- ЗАМЕНИ ССЫЛКУ НА СВОЙ ТЕЛЕГРАМ -->
+            <a href="https://t.me/ВАШ_НИК" class="contact-btn" target="_blank">Связаться</a>
         </footer>
 
     </div>
