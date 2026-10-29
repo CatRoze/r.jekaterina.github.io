@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katroz </title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #fafafa;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 60px 24px; }
+
+        /* Шапка */
+        header { margin-bottom: 80px; }
+        header h1 { font-size: 2.2rem; font-weight: 600; letter-spacing: -0.02em; }
+        header p { color: #666; margin-top: 8px; font-size: 1.1rem; }
+
+        /* Секции */
+        section { margin-bottom: 70px; }
+        section h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        /* О себе */
+        .about p { color: #444; max-width: 600px; }
+
+        /* Витрина работ */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 24px;
+        }
+        .card {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: box-shadow 0.2s;
+        }
+        .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+        .card-img {
+            height: 180px;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        .card-body { padding: 16px; }
+        .card-body h3 { font-size: 1rem; font-weight: 500; }
+        .card-body p { font-size: 0.9rem; color: #666; margin-top: 4px; }
+        .card-body .price { font-weight: 600; margin-top: 8px; color: #1a1a1a; }
+
+        /* Контакты */
+        .contact-btn {
+            display: inline-block;
+            background: #1a1a1a;
+            color: #fff;
+            text-decoration: none;
+            padding: 14px 32px;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: opacity 0.2s;
+        }
+        .contact-btn:hover { opacity: 0.8; }
+        .contact-note { margin-top: 16px; font-size: 0.9rem; color: #888; }
+
+        /* Подвал */
+        footer {
+            margin-top: 100px;
+            padding-top: 24px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.85rem;
+            color: #aaa;
+        }
+
+        @media (max-width: 500px) {
+            .container { padding: 40px 16px; }
+            header h1 { font-size: 1.7rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- ШАПКА -->
+        <header>
+            <h1>Katroz</h1>
+            <p>Ручная работа · Индивидуальные заказы</p>
+        </header>
+
+        <!-- О СЕБЕ -->
+        <section class="about">
+            <h2>О себе</h2>
+            <p>
+                Привет. Я делаю [что делаешь]. Работаю небольшими партиями, уделяю внимание деталям.
+                Если тебе близок минимализм и честные материалы — напиши, обсудим.
+            </p>
+        </section>
+
+        <!-- ВИТРИНА -->
+        <section>
+            <h2>Работы</h2>
+            <div class="grid">
+                <!-- Карточка 1 -->
+                <div class="card">
+                    <div class="card-img">Фото работы</div>
+                    <div class="card-body">
+                        <h3>Название работы 1</h3>
+                        <p>Короткое описание</p>
+                        <div class="price">По запросу</div>
+                    </div>
+                </div>
+                <!-- Карточка 2 -->
+                <div class="card">
+                    <div class="card-img">Фото работы</div>
+                    <div class="card-body">
+                        <h3>Название работы 2</h3>
+                        <p>Короткое описание</p>
+                        <div class="price">По запросу</div>
+                    </div>
+                </div>
+                <!-- Карточка 3 -->
+                <div class="card">
+                    <div class="card-img">Фото работы</div>
+                    <div class="card-body">
+                        <h3>Название работы 3</h3>
+                        <p>Короткое описание</p>
+                        <div class="price">По запросу</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- КОНТАКТЫ -->
+        <section>
+            <h2>Связаться</h2>
+            <p style="margin-bottom: 20px; color:#444;">
+                Напиши мне, чтобы обсудить заказ или задать вопрос.
+            </p>
+            <!-- ЗАМЕНИ ССЫЛКУ НА СВОЮ (Telegram / WhatsApp / почта) -->
+            <a href="https://t.me/твой_ник" class="contact-btn" target="_blank">Написать в Telegram</a>
+            <p class="contact-note">Отвечаю в течение дня.</p>
+        </section>
+
+        <!-- ПОДВАЛ -->
+        <footer>
+            © 2026 Katroz. Все права защищены.
+        </footer>
+
+    </div>
+</body>
+</html>
