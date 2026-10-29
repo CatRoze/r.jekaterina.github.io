@@ -7,13 +7,14 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-color: #f7f5f0; /* Теплый кремовый */
-            --text-main: #2b2b2b; /* Графит */
+            --bg-color: #f7f5f0;
+            --text-main: #2b2b2b;
             --text-muted: #7a7a7a;
+            --border-color: #d6cec1;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,46 +27,117 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 60px 24px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
 
         /* ШАПКА */
         header { 
             text-align: center; 
-            margin-bottom: 80px; 
-            padding-top: 40px;
+            margin-bottom: 30px; 
         }
         header h1 { 
             font-family: 'Cormorant Garamond', serif;
-            font-size: 5rem; /* Крупный заголовок */
+            font-size: 4rem;
             font-weight: 400;
             letter-spacing: 0.15em; 
             text-transform: uppercase;
-            color: var(--text-main);
         }
 
-        /* СЕТКА ГАЛЕРЕИ */
+        /* МЕНЮ */
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 0;
+            margin-bottom: 40px;
+        }
+        nav a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.3s;
+        }
+        nav a:hover { color: var(--text-muted); }
+
+        /* СЛАЙДЕР */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 70vh; /* Высота почти на весь экран */
+            min-height: 400px;
+            overflow: hidden;
+            margin-bottom: 80px;
+            background-color: #e8e4dd;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .slide.active { display: flex; }
+
+        /* Стрелки */
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(247, 245, 240, 0.7);
+            border: none;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-main);
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        .slider-btn:hover { background: var(--bg-color); }
+        .slider-btn.prev { left: 20px; }
+        .slider-btn.next { right: 20px; }
+
+        /* СЕТКА (3 в ряд) */
+        .gallery-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Автоматическая сетка */
-            gap: 20px; /* Отступы между фото */
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
         }
 
-        /* БЛОК ФОТО */
         .photo-wrapper {
             position: relative;
-            overflow: hidden; /* Чтобы увеличенное фото не вылезало за края */
+            overflow: hidden;
             background-color: #e8e4dd;
-            aspect-ratio: 4 / 5; /* Пропорции фото (вертикальные) */
+            aspect-ratio: 1 / 1; /* Квадратные фото для сетки */
             cursor: pointer;
             display: block;
         }
 
-        /* Сама картинка (заглушка) */
         .photo-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.8s ease; /* Плавное увеличение */
+            transition: transform 0.8s ease;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -75,9 +147,8 @@
             text-transform: uppercase;
         }
 
-        /* ЭФФЕКТ ПРИ НАВЕДЕНИИ */
         .photo-wrapper:hover .photo-img {
-            transform: scale(1.08); /* Увеличение на 8% */
+            transform: scale(1.08);
         }
 
         /* ПОДВАЛ */
@@ -85,6 +156,7 @@
             margin-top: 100px;
             padding-top: 40px;
             text-align: center;
+            border-top: 1px solid var(--border-color);
         }
 
         .contact-btn {
@@ -107,9 +179,11 @@
         }
 
         @media (max-width: 768px) {
-            header h1 { font-size: 3rem; }
-            .gallery { grid-template-columns: 1fr; } /* На телефоне в одну колонку */
-            .container { padding: 30px 16px; }
+            header h1 { font-size: 2.5rem; }
+            nav { gap: 20px; }
+            .gallery { grid-template-columns: 1fr; }
+            .slider-container { height: 50vh; }
+            .slider-btn { width: 40px; height: 40px; font-size: 1rem; }
         }
     </style>
 </head>
@@ -121,34 +195,47 @@
             <h1>Katroz</h1>
         </header>
 
-        <!-- СЕТКА С ФОТО -->
-        <!-- Сейчас там стоят заглушки, скоро мы их заменим на твои фото -->
+        <!-- МЕНЮ -->
+        <nav>
+            <a href="#">Коллекции</a>
+            <a href="#">Архив</a>
+            <a href="#">О нас</a>
+        </nav>
+
+        <!-- СЛАЙДЕР -->
+        <section class="slider-container">
+            <!-- Слайд 1 -->
+            <div class="slide active">Большое фото объекта 1</div>
+            <!-- Слайд 2 -->
+            <div class="slide">Большое фото объекта 2</div>
+            <!-- Слайд 3 -->
+            <div class="slide">Большое фото объекта 3</div>
+
+            <button class="slider-btn prev" onclick="changeSlide(-1)">&#10094;</button>
+            <button class="slider-btn next" onclick="changeSlide(1)">&#10095;</button>
+        </section>
+
+        <!-- СЕТКА -->
+        <h2 class="gallery-title">Избранное</h2>
         <section class="gallery">
-            
             <a href="https://t.me/ВАШ_НИК" target="_blank" class="photo-wrapper">
                 <div class="photo-img">Фото 1</div>
             </a>
-
             <a href="https://t.me/ВАШ_НИК" target="_blank" class="photo-wrapper">
                 <div class="photo-img">Фото 2</div>
             </a>
-
             <a href="https://t.me/ВАШ_НИК" target="_blank" class="photo-wrapper">
                 <div class="photo-img">Фото 3</div>
             </a>
-
             <a href="https://t.me/ВАШ_НИК" target="_blank" class="photo-wrapper">
                 <div class="photo-img">Фото 4</div>
             </a>
-
             <a href="https://t.me/ВАШ_НИК" target="_blank" class="photo-wrapper">
                 <div class="photo-img">Фото 5</div>
             </a>
-
             <a href="https://t.me/ВАШ_НИК" target="_blank" class="photo-wrapper">
                 <div class="photo-img">Фото 6</div>
             </a>
-
         </section>
 
         <!-- ПОДВАЛ -->
@@ -158,5 +245,27 @@
         </footer>
 
     </div>
+
+    <!-- СКРИПТ ДЛЯ СЛАЙДЕРА -->
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[index].classList.add('active');
+        }
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide >= slides.length) {
+                currentSlide = 0;
+            }
+            if (currentSlide < 0) {
+                currentSlide = slides.length - 1;
+            }
+            showSlide(currentSlide);
+        }
+    </script>
 </body>
 </html>
